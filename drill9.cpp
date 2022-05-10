@@ -1,15 +1,15 @@
 #include "std_lib_facilities.h"
-
+//define class named Date with 3 integer types
 struct Date {
     int y;     
     int m;     
     int d;
 };
-
+//using void function with reference type Date,and 3 integer type we defined earlier
 void init_day(Date& dd, int y, int m, int d)
 {
     if (d < 1 || d > 31) error("init_day: Invalid day");
-    if (m < 1 || m > 12) error("init_day: Invalid month");
+    if (m < 1 || m > 12) error("init_day: Invalid month");//test if its realistic 
 
     dd.y = y;
     dd.m = m;
@@ -18,7 +18,7 @@ void init_day(Date& dd, int y, int m, int d)
 
 void add_day(Date& dd, int n)
 {
-    dd.d += n;
+    dd.d += n;//asign dd.d to local variable.
     
     if (dd.d > 31) { ++dd.m; dd.d -= 31; }
     if (dd.d < 1)  { --dd.m; dd.d += 31; }
@@ -26,8 +26,8 @@ void add_day(Date& dd, int n)
     if (dd.m > 12) { ++dd.y; dd.m -= 12; }
     if (dd.m < 1)  { --dd.y; dd.m += 12; }
 }
-
-ostream& operator<<(ostream& os, const Date& d)
+//return main with input dd.m and dd.d
+ostream& operator<<(ostream& os, const Date& d)//we use ostream to return different types of variable.
 {
     return os << '(' << d.y
               << ',' << d.m
@@ -35,13 +35,13 @@ ostream& operator<<(ostream& os, const Date& d)
 }
 
 int main()
-try
+try//we use exception to test to ensure the whole fucntion excuateble even if we enncounter an error.
 {
     Date today;
     init_day(today, 1978, 6, 25);
 
     Date tomorrow{today};
-    add_day(tomorrow, 1);
+    add_day(tomorrow, 1);//tomorrow=today+1
 
     cout << "Today: " << today << '\n';
     cout << "Tomorrow: " << tomorrow << '\n';
@@ -53,6 +53,6 @@ try
 }
 catch(exception& e)
 {
-    cerr << e.what() << '\n';
+    cerr << e.what() << '\n';//find out error
     return 1;
 }
